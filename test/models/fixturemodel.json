@@ -1,47 +1,19 @@
-{
-    "fixtureId": "5",
-    "fixtureStatus": {
-        "displayed": true,
-        "suspended": false
-    },
-    "footballFullState": {
-        "homeTeam": "Arsenal",
-        "awayTeam": "Barcelona",
-        "finished": false,
-        "gameTimeInSeconds": 45,
-        "goals": [
-            {
-                "clockTime": 2,
-                "confirmed": true,
-                "id": 200,
-                "ownGoal": true,
-                "penalty": false,
-                "period": "first half",
-                "playerId": 2,
-                "teamId": "string"
-            }
-        ],
-        "period": "string",
-        "possibles": [
-            {}
-        ],
-        "corners": [
-            {}
-        ],
-        "redCards": [
-            {}
-        ],
-        "yellowCards": [
-            {}
-        ],
-        "startDateTime": "12:35:00",
-        "started": true,
-        "teams": [
-            {
-                "association": "string",
-                "name": "string",
-                "teamId": "string"
-            }
-        ]
+{ 
+    "fixtureId": 4,
+    "fixtureStatus": { "displayed": false, "suspended": true },
+    "footballFullState":
+     { "homeTeam": "Arsenal FC",
+       "awayTeam": "Barcelona FC",
+       "finished": false,
+       "gameTimeInSeconds": 950,
+       "goals": [],
+       "period": "FIRST_HALF",
+       "possibles": [],
+       "corners": [],
+       "redCards": [],
+       "yellowCards": [],
+       "startDateTime": "2018-03-20T10:49:38.655Z",
+       "started": true,
+       "teams": [] } 
+    
     }
-}

@@ -7,11 +7,12 @@ const url = `${config.baseurl}/fixtures`;
 let serviceresponse:any;
 let fixturesReturned: any;
 
-Given('I have called the service', async function () {
+Given('I have called the service to retrieve all fixtures', async function () {
     await fetch(url)
     .then(response => response.json())
     .then(data => {      
       serviceresponse = data;
+      console.log(serviceresponse);
     })
     .catch((err: any) => console.log(err))
     });
