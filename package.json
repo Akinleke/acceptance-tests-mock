@@ -6,9 +6,7 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {
-    "@covea/auto-test-node": "^1.1.13",
-    "@covea/testrail-node": "^1.1.3",
+  "dependencies": {    
     "@types/chai": "^4.2.1",
     "@types/cucumber": "^4.0.7",
     "@types/jquery": "^3.3.31",

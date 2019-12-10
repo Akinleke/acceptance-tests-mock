@@ -44,9 +44,6 @@ cucumber_1.When('I request the fixture details', async function () {
         .catch((err) => console.log(err));
 });
 cucumber_1.Then('the first team has Id {string}', function (string) {
-    serviceresponse.forEach((fixture) => {
-        console.log(`got fixture team id as: ${fixture.footballFullState.teams.teamid}`);
-        // expect(fixture.fixtureId).not.to.be.null;//check that each fixture has an id
-    });
+    console.log(serviceresponse);
 });
 //# sourceMappingURL=StoreNewFixtureSteps.js.map

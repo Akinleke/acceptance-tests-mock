@@ -4,6 +4,7 @@ import * as model from '../models/fixturemodel.json';
 import config from "../utilities/config";
 import { expect } from "chai";
 
+
 let url = `${config.baseurl}`;
 let serviceresponse:any;
 let fixturesReturned: any;
@@ -42,9 +43,7 @@ Given('I have connected to the resource {string}', function (resourcepath) {
   
 
   Then('the first team has Id {string}', function (string) {
-    serviceresponse.forEach((fixture: { footballFullState: any; })=>{
-      console.log(`got fixture team id as: ${fixture.footballFullState.teams.teamid}`);
-      // expect(fixture.fixtureId).not.to.be.null;//check that each fixture has an id
-       
-   })
+    console.log(serviceresponse);
+    
+
   });
