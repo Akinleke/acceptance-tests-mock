@@ -4,7 +4,7 @@ Tests Retrieve all Fixtures
 
 Scenario: Retrieve Fixtures
 Given I have called the service
-# When I "GET" the fixtures
-# Then response contains "3" fixtures
+When I check the fixtures
+Then response contains 3 fixtures
 # And Each fixture has a fixture id
 
