@@ -15,13 +15,17 @@ Given('I have called the service', async function () {
     })
     .catch((err: any) => console.log(err))
     });
-
-When('I check the fixtures', async function () {
     
-    fixturesReturned = serviceresponse.length;    
-    });
-    
-Then('response contains {int} fixtures', function (numberoffixtures:any) {
-    expect(fixturesReturned).to.be.equal(numberoffixtures);
-        //console.log(serviceresponse.length);
+Then('response contains {int} fixtures', function (numberofFixturesExpected:any) {
+    fixturesReturned = serviceresponse.length;// get the number of fixtures returned  
+    expect(fixturesReturned).to.be.equal(numberofFixturesExpected);// check that the number of fixtures is as expected
+        
       });
+    
+Then('Each fixture has a fixture id', function () {
+    serviceresponse.forEach((fixture: { fixtureId: any; })=>{
+       console.log(`got fixture id as: ${fixture.fixtureId}`);
+        expect(fixture.fixtureId).not.to.be.null;//check that each fixture has an id
+        
+    })
+});
