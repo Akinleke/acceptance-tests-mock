@@ -37,7 +37,7 @@ cucumber_1.Then('fixture is created', async function () {
 cucumber_1.When('I request the fixture details', async function () {
     //await fetch(`${url}"/fixture/"${model.fixtureId}`)
     await node_fetch_1.default(`${url}/3`)
-        .then(response => response.json())
+        .then((response) => response.json())
         .then(data => {
         serviceresponse = data;
     })

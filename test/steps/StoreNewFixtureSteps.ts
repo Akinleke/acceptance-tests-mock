@@ -34,7 +34,7 @@ Given('I have connected to the resource {string}', function (resourcepath) {
     
     //await fetch(`${url}"/fixture/"${model.fixtureId}`)
     await fetch(`${url}/3`)
-    .then(response => response.json())
+    .then((response: { json: () => void; }) => response.json())
     .then(data => {      
       serviceresponse = data;
     })
