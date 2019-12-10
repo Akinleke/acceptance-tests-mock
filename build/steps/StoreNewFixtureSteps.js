@@ -35,7 +35,7 @@ cucumber_1.Then('fixture is created', async function () {
     chai_1.expect(serviceresponse).contain("Fixture has been added");
 });
 cucumber_1.When('I request the fixture details', async function () {
-    //await fetch(`${url}"/fixture/"${model.fixtureId}`)
+    //await fetch(`${url}/${model.fixtureId}`)   
     await node_fetch_1.default(`${url}/3`)
         .then((response) => response.json())
         .then(data => {
@@ -44,6 +44,9 @@ cucumber_1.When('I request the fixture details', async function () {
         .catch((err) => console.log(err));
 });
 cucumber_1.Then('the first team has Id {string}', function (string) {
-    console.log(serviceresponse);
+    //     serviceresponse.footballFullState.teams.forEach((teams: { teamId: any; })=>{
+    //     console.log(`got first team id as: ${teams["teamId"]}`);       
+    //  })
+    console.log(serviceresponse.footballFullState.teams.teamId.indexOf("HOME"));
 });
 //# sourceMappingURL=StoreNewFixtureSteps.js.map

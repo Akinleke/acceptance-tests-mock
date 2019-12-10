@@ -32,8 +32,8 @@ Given('I have connected to the resource {string}', function (resourcepath) {
 
   When('I request the fixture details', async function () {
     
-    //await fetch(`${url}"/fixture/"${model.fixtureId}`)
-    await fetch(`${url}/3`)
+    await fetch(`${url}/${model.fixtureId}`)   
+    //await fetch(`${url}/3`)   
     .then((response: { json: () => void; }) => response.json())
     .then(data => {      
       serviceresponse = data;
@@ -42,8 +42,10 @@ Given('I have connected to the resource {string}', function (resourcepath) {
     });
   
 
-  Then('the first team has Id {string}', function (string) {
-    console.log(serviceresponse);
-    
-
+  Then('the first team has Id {string}', function (string) {     
+      serviceresponse.footballFullState.teams.forEach((teams: { teamId: any; })=>{
+      console.log(`got first team id as: ${teams["teamId"]}`);    
+             
+   })
+  
   });

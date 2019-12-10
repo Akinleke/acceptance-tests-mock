@@ -9,7 +9,7 @@ let fixturesReturned: any;
 
 Given('I have called the service to retrieve all fixtures', async function () {
     await fetch(url)
-    .then(response => response.json())
+    .then((response: { json: () => void; }) => response.json())
     .then(data => {      
       serviceresponse = data;
       console.log(serviceresponse);

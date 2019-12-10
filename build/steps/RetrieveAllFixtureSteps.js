@@ -12,7 +12,7 @@ let serviceresponse;
 let fixturesReturned;
 cucumber_1.Given('I have called the service to retrieve all fixtures', async function () {
     await node_fetch_1.default(url)
-        .then(response => response.json())
+        .then((response) => response.json())
         .then(data => {
         serviceresponse = data;
         console.log(serviceresponse);
