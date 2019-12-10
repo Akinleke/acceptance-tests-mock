@@ -17,29 +17,34 @@ Given('I have connected to the resource {string}', function (resourcepath) {
 
   When('I ask to create fixture with the data in file', async function () {
     await fetch(url,{method:'POST',body:`${requestBody}`})
-    .then(response => response.json())
+    .then(response => response.text())
     .then(data => {      
       serviceresponse = data;
     })
     .catch((err: any) => console.log(err))    
   });
 
-  Then('fixture is created', function () {
+  Then('fixture is created', async function () {
     // Write code here that turns the phrase above into concrete actions
-    expect(JSON.stringify(serviceresponse)).contain("Fixture has been added");
+    expect(serviceresponse).contain("Fixture has been added");
   });
 
   When('I request the fixture details', async function () {
     
-    await fetch(`${url}"\fixture\"${model.fixtureId}`)
+    //await fetch(`${url}"/fixture/"${model.fixtureId}`)
+    await fetch(`${url}/3`)
     .then(response => response.json())
     .then(data => {      
       serviceresponse = data;
     })
-    .catch((err: any) => console.log(err))
+    .catch((err: any) => console.log(err))    
     });
-  });
+  
 
   Then('the first team has Id {string}', function (string) {
-    
+    serviceresponse.forEach((fixture: { footballFullState: any; })=>{
+      console.log(`got fixture team id as: ${fixture.footballFullState.teams.teamid}`);
+      // expect(fixture.fixtureId).not.to.be.null;//check that each fixture has an id
+       
+   })
   });

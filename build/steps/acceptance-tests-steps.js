@@ -12,31 +12,38 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cucumber_1 = require("cucumber");
 const node_fetch_1 = __importDefault(require("node-fetch"));
-const model = __importStar(require("../models/fixturemodel.json"));
 const config_1 = __importDefault(require("../utilities/config"));
 const chai_1 = require("chai");
-let url = `${config_1.default.baseurl}`;
+const model = __importStar(require("../models/fixturemodel.json"));
+const url = `${config_1.default.baseurl}/fixtures`;
 let serviceresponse;
 let fixturesReturned;
 let requestBody = model; // get the request body from file
-cucumber_1.Given('I have connected to the resource {string}', function (resourcepath) {
-    url = `${url}${resourcepath}`;
-});
-cucumber_1.When('I ask to create fixture with the data in file', async function () {
-    await node_fetch_1.default(url, { method: 'POST', body: `${requestBody}` })
-        .then(response => response.text())
+cucumber_1.Given('I have called the service to retrieve all fixtures', async function () {
+    await node_fetch_1.default(url)
+        .then(response => response.json())
         .then(data => {
         serviceresponse = data;
+        console.log(serviceresponse);
     })
         .catch((err) => console.log(err));
 });
-cucumber_1.Then('fixture is created', async function () {
+cucumber_1.Then('response contains {int} fixtures', function (numberofFixturesExpected) {
+    fixturesReturned = serviceresponse.length; // get the number of fixtures returned  
+    chai_1.expect(fixturesReturned).to.be.equal(numberofFixturesExpected); // check that the number of fixtures is as expected
+});
+cucumber_1.Then('Each fixture has a fixture id', function () {
+    serviceresponse.forEach((fixture) => {
+        console.log(`got fixture id as: ${fixture.fixtureId}`);
+        chai_1.expect(fixture.fixtureId).not.to.be.null; //check that each fixture has an id        
+    });
+});
+cucumber_1.Then('fixture is created', function () {
     // Write code here that turns the phrase above into concrete actions
-    chai_1.expect(serviceresponse).contain("Fixture has been added");
+    chai_1.expect(JSON.stringify(serviceresponse)).contain("Fixture has been added");
 });
 cucumber_1.When('I request the fixture details', async function () {
-    //await fetch(`${url}"/fixture/"${model.fixtureId}`)
-    await node_fetch_1.default(`${url}/3`)
+    await node_fetch_1.default(`${url}"\fixture\"${model.fixtureId}`)
         .then(response => response.json())
         .then(data => {
         serviceresponse = data;
@@ -44,9 +51,5 @@ cucumber_1.When('I request the fixture details', async function () {
         .catch((err) => console.log(err));
 });
 cucumber_1.Then('the first team has Id {string}', function (string) {
-    serviceresponse.forEach((fixture) => {
-        console.log(`got fixture team id as: ${fixture.footballFullState.teams.teamid}`);
-        // expect(fixture.fixtureId).not.to.be.null;//check that each fixture has an id
-    });
 });
-//# sourceMappingURL=StoreNewFixtureSteps.js.map
+//# sourceMappingURL=acceptance-tests-steps.js.map
