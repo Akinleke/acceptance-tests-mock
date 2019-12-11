@@ -13,6 +13,5 @@ const report = [
 
   module.exports = {
     report,
-    noreport,
-    testrail
+    noreport,   
   };
