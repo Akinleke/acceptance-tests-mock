@@ -10,7 +10,7 @@ let serviceresponse:any;
 let fixturesReturned: any;
 const requestBody = model;// get the request body from file
 
-Given('I have called the service {string} to retrieve all fixtures', async function (resourcepath :string) {
+Given('I have called the service {string} to retrieve all fixtures',{timeout:10000}, async function (resourcepath :string) {
     await fetch(`${config.baseurl}${resourcepath}`)
     .then((response: { json: () => void; }) => response.json())
     .then(data => {      
