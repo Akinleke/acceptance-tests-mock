@@ -53,9 +53,9 @@ cucumber_1.Then('fixture is created', async function () {
     // Write code here that turns the phrase above into concrete actions
     chai_1.expect(serviceresponse).contain("Fixture has been added");
 });
-cucumber_1.When('I request the fixture details', async function () {
-    await node_fetch_1.default(`${url}/${model.fixtureId}`)
-        //await fetch(`${url}/3`)   
+cucumber_1.When('I request the fixture details {string}', async function (string) {
+    //await fetch(`${url}/${model.fixtureId}`)   
+    await node_fetch_1.default(`${url}/${string}`)
         .then((response) => response.json())
         .then(data => {
         serviceresponse = data;
@@ -67,4 +67,4 @@ cucumber_1.Then('the first team has Id {string}', function (string) {
         console.log(`got first team id as: ${teams["teamId"]}`);
     });
 });
-//# sourceMappingURL=RetrieveAllFixtureSteps.js.map
+//# sourceMappingURL=FixtureSteps.js.map
