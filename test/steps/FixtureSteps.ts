@@ -24,7 +24,7 @@ Given('I have called the service {string} to retrieve all fixtures', async funct
     
 Then('response contains {int} fixtures', function (numberofFixturesExpected:any) {
     fixturesReturned = serviceresponse.length;// get the number of fixtures returned  
-    expect(fixturesReturned).to.be.equal(numberofFixturesExpected);// check that the number of fixtures is as expected
+    expect(fixturesReturned).to.be.equal(numberofFixturesExpected,"mismatch in number of fixtures");// check that the number of fixtures is as expected
         
       });
     
@@ -67,12 +67,12 @@ When('I request the fixture details {string}', async function (fixtureId:string)
   });
 
 
-Then('the first team has Id {string}', function (team:string) {     
-    expect(serviceresponse.footballFullState.teams[0].teamId).to.be.equal(team);
+Then('the first team has Id {string}', function (teamId:string) {     
+    expect(serviceresponse.footballFullState.teams[0].teamId).to.be.equal(teamId,"Team Id doesnt match");
 });
 
 Then('the fixture {string} is returned', function (returnedfixture:string) {
-  expect(serviceresponse.fixtureId).to.be.equal(returnedfixture);  
+  expect(serviceresponse.fixtureId).to.be.equal(returnedfixture,"fixture not found");  
 });
 
 When('I ask to delete the feature {string}', async function (toDelete:string) {
