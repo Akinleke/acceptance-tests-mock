@@ -24,7 +24,6 @@ cucumber_1.Given('I have called the service {string} to retrieve all fixtures', 
         .then((response) => response.json())
         .then(data => {
         serviceresponse = data;
-        console.log(serviceresponse);
     })
         .catch((err) => {
         chai_1.expect.fail({ message: "unexpected response test failed" });
@@ -55,7 +54,6 @@ cucumber_1.Given('I ask to create fixture with id {string} using model in file',
     });
 });
 cucumber_1.Then('fixture is created', async function () {
-    // Write code here that turns the phrase above into concrete actions
     chai_1.expect(serviceresponse).contain("Fixture has been added");
 });
 cucumber_1.When('I request the fixture details {string}', async function (fixtureId) {
@@ -63,7 +61,6 @@ cucumber_1.When('I request the fixture details {string}', async function (fixtur
         .then((response) => response.json())
         .then(data => {
         serviceresponse = data;
-        console.log(serviceresponse);
     })
         .catch((err) => {
         chai_1.expect.fail({ message: "unexpected response test failed" });
@@ -90,7 +87,7 @@ cucumber_1.When('I ask to delete the feature {string}', async function (toDelete
 cucumber_1.Then('the feature {string} no longer exists', function (deleted) {
     serviceresponse.forEach((fixture) => {
         console.log(`got fixture id as: ${fixture.fixtureId}`);
-        chai_1.expect(fixture.fixtureId).not.to.be.equal(deleted); //check that each fixture has an id
+        chai_1.expect(fixture.fixtureId).not.to.be.equal(deleted); //check that each fixture has an id     
     });
 });
 //# sourceMappingURL=FixtureSteps.js.map
