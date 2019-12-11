@@ -14,16 +14,16 @@ When I request the fixture details "9"
 Then the first team has Id "HOME"
 
 Scenario: 3. Latency Test
-Given I ask to create fixture with id "10" using model in file
-Then fixture is created
-When I request the fixture details "10"
-Then the fixture "10" is returned
-
-Scenario: 4. Deletion Test
 Given I ask to create fixture with id "5" using model in file
 Then fixture is created
 When I request the fixture details "5"
 Then the fixture "5" is returned
-When I ask to delete the feature "5"
-When I have called the service "/fixtures" to retrieve all fixtures
-Then the feature "5" no longer exists
+
+# Scenario: 4. Deletion Test
+# Given I ask to create fixture with id "6" using model in file
+# Then fixture is created
+# When I request the fixture details "6"
+# Then the fixture "6" is returned
+# When I ask to delete the feature "6"
+# When I have called the service "/fixtures" to retrieve all fixtures
+# Then the feature "6" no longer exists

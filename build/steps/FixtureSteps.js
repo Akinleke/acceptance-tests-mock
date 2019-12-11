@@ -18,7 +18,7 @@ const model = __importStar(require("../models/fixturemodel.json"));
 let url = `${config_1.default.baseurl}`;
 let serviceresponse;
 let fixturesReturned;
-let requestBody = model; // get the request body from file
+const requestBody = model; // get the request body from file
 cucumber_1.Given('I have called the service {string} to retrieve all fixtures', async function (resourcepath) {
     await node_fetch_1.default(`${config_1.default.baseurl}${resourcepath}`)
         .then((response) => response.json())
@@ -42,8 +42,10 @@ cucumber_1.Then('Each fixture has a fixture id', function () {
 });
 cucumber_1.Given('I ask to create fixture with id {string} using model in file', async function (fixtureId) {
     url = `${config_1.default.baseurl}/fixture`;
-    requestBody.fixtureId = `${fixtureId}`;
-    await node_fetch_1.default(url, { method: 'POST', body: `${requestBody}` })
+    requestBody.fixtureId = fixtureId;
+    await node_fetch_1.default(url, { method: 'post', body: `${JSON.stringify(requestBody)}`,
+        headers: { 'Content-Type': 'application/json' },
+    })
         .then(response => response.text())
         .then(data => {
         serviceresponse = data;
@@ -61,6 +63,7 @@ cucumber_1.When('I request the fixture details {string}', async function (fixtur
         .then((response) => response.json())
         .then(data => {
         serviceresponse = data;
+        console.log(serviceresponse);
     })
         .catch((err) => {
         chai_1.expect.fail({ message: "unexpected response test failed" });
@@ -74,11 +77,11 @@ cucumber_1.Then('the fixture {string} is returned', function (returnedfixture) {
 });
 cucumber_1.When('I ask to delete the feature {string}', async function (toDelete) {
     url = `${config_1.default.baseurl}/fixture`;
-    requestBody.fixtureId = `${toDelete}`;
-    await node_fetch_1.default(url, { method: 'DELETE', body: `${requestBody}` })
+    await node_fetch_1.default(url, { method: 'delete' })
         .then(response => response.text())
         .then(data => {
         serviceresponse = data;
+        chai_1.expect(serviceresponse.text).to.contain("Fixture has been deleted");
     })
         .catch((err) => {
         chai_1.expect.fail({ message: "unexpected response test failed" });

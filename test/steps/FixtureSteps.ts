@@ -8,7 +8,7 @@ import * as model from '../models/fixturemodel.json';
 let url = `${config.baseurl}`;
 let serviceresponse:any;
 let fixturesReturned: any;
-let requestBody = model;// get the request body from file
+const requestBody = model;// get the request body from file
 
 Given('I have called the service {string} to retrieve all fixtures', async function (resourcepath :string) {
     await fetch(`${config.baseurl}${resourcepath}`)
@@ -36,10 +36,12 @@ Then('Each fixture has a fixture id', function () {
     })
 });
 
-Given('I ask to create fixture with id {string} using model in file', async function (fixtureId:string) {
+Given('I ask to create fixture with id {string} using model in file', async function (fixtureId:any) {
   url = `${config.baseurl}/fixture`;
-  requestBody.fixtureId = `${fixtureId}`;
-  await fetch(url,{method:'POST',body:`${requestBody}`})
+  requestBody.fixtureId = fixtureId;
+  await fetch(url,{method:'post',body:`${JSON.stringify(requestBody)}`,
+  headers:{'Content-Type':'application/json'}, 
+})
   .then(response => response.text())
   .then(data => {      
     serviceresponse = data;
@@ -60,6 +62,7 @@ When('I request the fixture details {string}', async function (fixtureId:string)
   .then((response: { json: () => void; }) => response.json())
   .then(data => {      
     serviceresponse = data;
+    console.log(serviceresponse);
   })
   .catch((err: any) => {
     expect.fail({message:"unexpected response test failed"})
@@ -75,13 +78,13 @@ Then('the fixture {string} is returned', function (returnedfixture:string) {
   expect(serviceresponse.fixtureId).to.be.equal(returnedfixture,"fixture not found");  
 });
 
-When('I ask to delete the feature {string}', async function (toDelete:string) {
-  url = `${config.baseurl}/fixture`;
-  requestBody.fixtureId = `${toDelete}`;
-  await fetch(url,{method:'DELETE',body:`${requestBody}`})
+When('I ask to delete the feature {string}', async function (toDelete:any) {
+  url = `${config.baseurl}/fixture`; 
+  await fetch(url,{method:'delete'})
   .then(response => response.text())
   .then(data => {      
     serviceresponse = data;
+    expect(serviceresponse.text).to.contain("Fixture has been deleted");
   })
   .catch((err: any) => {
     expect.fail({message:"unexpected response test failed"})
