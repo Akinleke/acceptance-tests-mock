@@ -39,7 +39,8 @@ Given('I have connected to the resource {string}', function (resourcepath) {
   });  
 
 
-When('I ask to create fixture with the data in file', async function () {
+When('I ask to create fixture with id {string} using model in file', async function (string) {
+  requestBody.fixtureId = `${string}`;
   await fetch(url,{method:'POST',body:`${requestBody}`})
   .then(response => response.text())
   .then(data => {      

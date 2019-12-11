@@ -41,7 +41,8 @@ cucumber_1.Then('Each fixture has a fixture id', function () {
 cucumber_1.Given('I have connected to the resource {string}', function (resourcepath) {
     url = `${url}${resourcepath}`;
 });
-cucumber_1.When('I ask to create fixture with the data in file', async function () {
+cucumber_1.When('I ask to create fixture with id {string} using model in file', async function (string) {
+    requestBody.fixtureId = `${string}`;
     await node_fetch_1.default(url, { method: 'POST', body: `${requestBody}` })
         .then(response => response.text())
         .then(data => {
