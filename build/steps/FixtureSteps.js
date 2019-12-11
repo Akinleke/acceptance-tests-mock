@@ -32,7 +32,7 @@ cucumber_1.Given('I have called the service {string} to retrieve all fixtures', 
 });
 cucumber_1.Then('response contains {int} fixtures', function (numberofFixturesExpected) {
     fixturesReturned = serviceresponse.length; // get the number of fixtures returned  
-    chai_1.expect(fixturesReturned).to.be.equal(numberofFixturesExpected); // check that the number of fixtures is as expected
+    chai_1.expect(fixturesReturned).to.be.equal(numberofFixturesExpected, "mismatch in number of fixtures"); // check that the number of fixtures is as expected
 });
 cucumber_1.Then('Each fixture has a fixture id', function () {
     serviceresponse.forEach((fixture) => {
@@ -66,11 +66,11 @@ cucumber_1.When('I request the fixture details {string}', async function (fixtur
         chai_1.expect.fail({ message: "unexpected response test failed" });
     });
 });
-cucumber_1.Then('the first team has Id {string}', function (team) {
-    chai_1.expect(serviceresponse.footballFullState.teams[0].teamId).to.be.equal(team);
+cucumber_1.Then('the first team has Id {string}', function (teamId) {
+    chai_1.expect(serviceresponse.footballFullState.teams[0].teamId).to.be.equal(teamId, "Team Id doesnt match");
 });
 cucumber_1.Then('the fixture {string} is returned', function (returnedfixture) {
-    chai_1.expect(serviceresponse.fixtureId).to.be.equal(returnedfixture);
+    chai_1.expect(serviceresponse.fixtureId).to.be.equal(returnedfixture, "fixture not found");
 });
 cucumber_1.When('I ask to delete the feature {string}', async function (toDelete) {
     url = `${config_1.default.baseurl}/fixture`;
