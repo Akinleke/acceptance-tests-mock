@@ -1,7 +1,6 @@
 # acceptance-tests-mock
 acceptance tests for mock service
 
-#Not able to Save or Delete using the webserver provided
 
 #Folder Structure
 
