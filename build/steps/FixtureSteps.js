@@ -63,13 +63,8 @@ cucumber_1.When('I request the fixture details {string}', async function (string
     })
         .catch((err) => console.log(err));
 });
-cucumber_1.Then('the first team has Id {string}', function (string) {
-    serviceresponse.footballFullState.teams.forEach((teams) => {
-        console.log(`got first team id as: ${teams["teamId"]}`);
-    });
-});
-cucumber_1.When('I request the fixture details for id {string}', function (string) {
-    // Write code here that turns the phrase above into concrete actions
+cucumber_1.Then('the first team has Id {string}', function (team) {
+    chai_1.expect(serviceresponse.footballFullState.teams[0].teamId).to.be.equal(team);
 });
 cucumber_1.Then('the fixture {string} is returned', function (string) {
     // Write code here that turns the phrase above into concrete actions

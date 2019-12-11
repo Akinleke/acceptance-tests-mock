@@ -10,8 +10,8 @@ let serviceresponse:any;
 let fixturesReturned: any;
 let requestBody = model;// get the request body from file
 
-Given('I have called the service {string} to retrieve all fixtures', async function (string) {
-    await fetch(`${config.baseurl}${string}`)
+Given('I have called the service {string} to retrieve all fixtures', async function (resourcepath :string) {
+    await fetch(`${config.baseurl}${resourcepath}`)
     .then((response: { json: () => void; }) => response.json())
     .then(data => {      
       serviceresponse = data;
@@ -36,11 +36,9 @@ Then('Each fixture has a fixture id', function () {
     })
 });
 
-
-
-Given('I ask to create fixture with id {string} using model in file', async function (string) {
+Given('I ask to create fixture with id {string} using model in file', async function (fixtureId:string) {
   url = `${config.baseurl}/fixture`;
-  requestBody.fixtureId = `${string}`;
+  requestBody.fixtureId = `${fixtureId}`;
   await fetch(url,{method:'POST',body:`${requestBody}`})
   .then(response => response.text())
   .then(data => {      
@@ -54,10 +52,10 @@ Then('fixture is created', async function () {
   expect(serviceresponse).contain("Fixture has been added");
 });
 
-When('I request the fixture details {string}', async function (string) {
+When('I request the fixture details {string}', async function (fixtureId:string) {
   
   //await fetch(`${url}/${model.fixtureId}`)   
-  await fetch(`${url}/${string}`)   
+  await fetch(`${url}/${fixtureId}`)   
   .then((response: { json: () => void; }) => response.json())
   .then(data => {      
     serviceresponse = data;
@@ -66,29 +64,21 @@ When('I request the fixture details {string}', async function (string) {
   });
 
 
-Then('the first team has Id {string}', function (string) {     
-    serviceresponse.footballFullState.teams.forEach((teams: { teamId: any; })=>{
-    console.log(`got first team id as: ${teams["teamId"]}`);   
-   })
+Then('the first team has Id {string}', function (team:string) {     
+    expect(serviceresponse.footballFullState.teams[0].teamId).to.be.equal(team);
 });
 
-When('I request the fixture details for id {string}', function (string) {
+Then('the fixture {string} is returned', function (returnedfixture:string) {
   // Write code here that turns the phrase above into concrete actions
   
 });
 
-
-Then('the fixture {string} is returned', function (string) {
+When('I ask to delete the feature {string}', function (toDelete:string) {
   // Write code here that turns the phrase above into concrete actions
   
 });
 
-When('I ask to delete the feature {string}', function (string) {
-  // Write code here that turns the phrase above into concrete actions
-  
-});
-
-Then('the feature {string} no longer exists', function (string) {
+Then('the feature {string} no longer exists', function (deleted:string) {
   // Write code here that turns the phrase above into concrete actions
   
 });
