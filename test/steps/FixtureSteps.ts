@@ -44,7 +44,9 @@ Given('I ask to create fixture with id {string} using model in file', async func
   .then(data => {      
     serviceresponse = data;
   })
-  .catch((err: any) => console.log(err))    
+  .catch((err: any) => {
+    expect.fail({message:"unexpected response test failed"})
+  })   
 });
 
 Then('fixture is created', async function () {
@@ -54,13 +56,14 @@ Then('fixture is created', async function () {
 
 When('I request the fixture details {string}', async function (fixtureId:string) {
   
-  //await fetch(`${url}/${model.fixtureId}`)   
   await fetch(`${url}/${fixtureId}`)   
   .then((response: { json: () => void; }) => response.json())
   .then(data => {      
     serviceresponse = data;
   })
-  .catch((err: any) => console.log(err))    
+  .catch((err: any) => {
+    expect.fail({message:"unexpected response test failed"})
+  })   
   });
 
 
@@ -73,12 +76,24 @@ Then('the fixture {string} is returned', function (returnedfixture:string) {
   
 });
 
-When('I ask to delete the feature {string}', function (toDelete:string) {
-  // Write code here that turns the phrase above into concrete actions
+When('I ask to delete the feature {string}', async function (toDelete:string) {
+  url = `${config.baseurl}/fixture`;
+  requestBody.fixtureId = `${toDelete}`;
+  await fetch(url,{method:'DELETE',body:`${requestBody}`})
+  .then(response => response.text())
+  .then(data => {      
+    serviceresponse = data;
+  })
+  .catch((err: any) => {
+    expect.fail({message:"unexpected response test failed"})
+  })   
   
 });
 
 Then('the feature {string} no longer exists', function (deleted:string) {
-  // Write code here that turns the phrase above into concrete actions
-  
+  serviceresponse.forEach((fixture: { fixtureId: any; })=>{
+    console.log(`got fixture id as: ${fixture.fixtureId}`);
+     expect(fixture.fixtureId).not.to.be.equal(deleted);//check that each fixture has an id
+     
+ })
 });

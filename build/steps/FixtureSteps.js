@@ -19,8 +19,8 @@ let url = `${config_1.default.baseurl}`;
 let serviceresponse;
 let fixturesReturned;
 let requestBody = model; // get the request body from file
-cucumber_1.Given('I have called the service {string} to retrieve all fixtures', async function (string) {
-    await node_fetch_1.default(`${config_1.default.baseurl}${string}`)
+cucumber_1.Given('I have called the service {string} to retrieve all fixtures', async function (resourcepath) {
+    await node_fetch_1.default(`${config_1.default.baseurl}${resourcepath}`)
         .then((response) => response.json())
         .then(data => {
         serviceresponse = data;
@@ -40,39 +40,54 @@ cucumber_1.Then('Each fixture has a fixture id', function () {
         chai_1.expect(fixture.fixtureId).not.to.be.null; //check that each fixture has an id
     });
 });
-cucumber_1.Given('I ask to create fixture with id {string} using model in file', async function (string) {
+cucumber_1.Given('I ask to create fixture with id {string} using model in file', async function (fixtureId) {
     url = `${config_1.default.baseurl}/fixture`;
-    requestBody.fixtureId = `${string}`;
+    requestBody.fixtureId = `${fixtureId}`;
     await node_fetch_1.default(url, { method: 'POST', body: `${requestBody}` })
         .then(response => response.text())
         .then(data => {
         serviceresponse = data;
     })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+        chai_1.expect.fail({ message: "unexpected response test failed" });
+    });
 });
 cucumber_1.Then('fixture is created', async function () {
     // Write code here that turns the phrase above into concrete actions
     chai_1.expect(serviceresponse).contain("Fixture has been added");
 });
-cucumber_1.When('I request the fixture details {string}', async function (string) {
-    //await fetch(`${url}/${model.fixtureId}`)   
-    await node_fetch_1.default(`${url}/${string}`)
+cucumber_1.When('I request the fixture details {string}', async function (fixtureId) {
+    await node_fetch_1.default(`${url}/${fixtureId}`)
         .then((response) => response.json())
         .then(data => {
         serviceresponse = data;
     })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+        chai_1.expect.fail({ message: "unexpected response test failed" });
+    });
 });
 cucumber_1.Then('the first team has Id {string}', function (team) {
     chai_1.expect(serviceresponse.footballFullState.teams[0].teamId).to.be.equal(team);
 });
-cucumber_1.Then('the fixture {string} is returned', function (string) {
+cucumber_1.Then('the fixture {string} is returned', function (returnedfixture) {
     // Write code here that turns the phrase above into concrete actions
 });
-cucumber_1.When('I ask to delete the feature {string}', function (string) {
-    // Write code here that turns the phrase above into concrete actions
+cucumber_1.When('I ask to delete the feature {string}', async function (toDelete) {
+    url = `${config_1.default.baseurl}/fixture`;
+    requestBody.fixtureId = `${toDelete}`;
+    await node_fetch_1.default(url, { method: 'DELETE', body: `${requestBody}` })
+        .then(response => response.text())
+        .then(data => {
+        serviceresponse = data;
+    })
+        .catch((err) => {
+        chai_1.expect.fail({ message: "unexpected response test failed" });
+    });
 });
-cucumber_1.Then('the feature {string} no longer exists', function (string) {
-    // Write code here that turns the phrase above into concrete actions
+cucumber_1.Then('the feature {string} no longer exists', function (deleted) {
+    serviceresponse.forEach((fixture) => {
+        console.log(`got fixture id as: ${fixture.fixtureId}`);
+        chai_1.expect(fixture.fixtureId).not.to.be.equal(deleted); //check that each fixture has an id
+    });
 });
 //# sourceMappingURL=FixtureSteps.js.map
