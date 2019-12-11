@@ -72,8 +72,7 @@ Then('the first team has Id {string}', function (team:string) {
 });
 
 Then('the fixture {string} is returned', function (returnedfixture:string) {
-  // Write code here that turns the phrase above into concrete actions
-  
+  expect(serviceresponse.fixtureId).to.be.equal(returnedfixture);  
 });
 
 When('I ask to delete the feature {string}', async function (toDelete:string) {

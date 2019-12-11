@@ -70,7 +70,7 @@ cucumber_1.Then('the first team has Id {string}', function (team) {
     chai_1.expect(serviceresponse.footballFullState.teams[0].teamId).to.be.equal(team);
 });
 cucumber_1.Then('the fixture {string} is returned', function (returnedfixture) {
-    // Write code here that turns the phrase above into concrete actions
+    chai_1.expect(serviceresponse.fixtureId).to.be.equal(returnedfixture);
 });
 cucumber_1.When('I ask to delete the feature {string}', async function (toDelete) {
     url = `${config_1.default.baseurl}/fixture`;
