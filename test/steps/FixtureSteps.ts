@@ -34,7 +34,7 @@ Then('Each fixture has a fixture id', function () {
     })
 });
 
-Given('I ask to create fixture with id {string} using model in file', async function (fixtureId:any) {
+Given('I ask to create fixture with id {string} using model in file',{timeout:10000}, async function (fixtureId:any) {
   url = `${config.baseurl}/fixture`;
   requestBody.fixtureId = fixtureId;
   await fetch(url,{method:'post',body:`${JSON.stringify(requestBody)}`,
@@ -53,7 +53,7 @@ Then('fixture is created', async function () {
   expect(serviceresponse).contain("Fixture has been added");
 });
 
-When('I request the fixture details {string}', async function (fixtureId:string) {  
+When('I request the fixture details {string}',{timeout:10000}, async function (fixtureId:string) {  
   await fetch(`${url}/${fixtureId}`)   
   .then((response: { json: () => void; }) => response.json())
   .then(data => {      
@@ -72,7 +72,7 @@ Then('the fixture {string} is returned', function (returnedfixture:string) {
   expect(serviceresponse.fixtureId).to.be.equal(returnedfixture,"fixture not found");  
 });
 
-When('I ask to delete the feature {string}', async function (toDelete:any) {
+When('I ask to delete the feature {string}',{timeout:10000}, async function (toDelete:any) {
   url = `${config.baseurl}/fixture/${toDelete}`; 
   await fetch(url,{method:'delete'})
   .then(response => response.text())
