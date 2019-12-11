@@ -76,12 +76,14 @@ cucumber_1.Then('the fixture {string} is returned', function (returnedfixture) {
     chai_1.expect(serviceresponse.fixtureId).to.be.equal(returnedfixture, "fixture not found");
 });
 cucumber_1.When('I ask to delete the feature {string}', async function (toDelete) {
-    url = `${config_1.default.baseurl}/fixture`;
+    url = `${config_1.default.baseurl}/fixture/${toDelete}`;
     await node_fetch_1.default(url, { method: 'delete' })
         .then(response => response.text())
         .then(data => {
         serviceresponse = data;
-        chai_1.expect(serviceresponse.text).to.contain("Fixture has been deleted");
+        // console.log(`this is url ${url}`)
+        // console.log(serviceresponse);
+        chai_1.expect(serviceresponse).to.contain("Fixture has been deleted");
     })
         .catch((err) => {
         chai_1.expect.fail({ message: "unexpected response test failed" });

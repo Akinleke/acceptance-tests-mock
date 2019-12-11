@@ -56,8 +56,7 @@ Then('fixture is created', async function () {
   expect(serviceresponse).contain("Fixture has been added");
 });
 
-When('I request the fixture details {string}', async function (fixtureId:string) {
-  
+When('I request the fixture details {string}', async function (fixtureId:string) {  
   await fetch(`${url}/${fixtureId}`)   
   .then((response: { json: () => void; }) => response.json())
   .then(data => {      
@@ -67,8 +66,7 @@ When('I request the fixture details {string}', async function (fixtureId:string)
   .catch((err: any) => {
     expect.fail({message:"unexpected response test failed"})
   })   
-  });
-
+});
 
 Then('the first team has Id {string}', function (teamId:string) {     
     expect(serviceresponse.footballFullState.teams[0].teamId).to.be.equal(teamId,"Team Id doesnt match");
@@ -79,12 +77,12 @@ Then('the fixture {string} is returned', function (returnedfixture:string) {
 });
 
 When('I ask to delete the feature {string}', async function (toDelete:any) {
-  url = `${config.baseurl}/fixture`; 
+  url = `${config.baseurl}/fixture/${toDelete}`; 
   await fetch(url,{method:'delete'})
   .then(response => response.text())
   .then(data => {      
-    serviceresponse = data;
-    expect(serviceresponse.text).to.contain("Fixture has been deleted");
+    serviceresponse = data;  
+    expect(serviceresponse).to.contain("Fixture has been deleted");
   })
   .catch((err: any) => {
     expect.fail({message:"unexpected response test failed"})
