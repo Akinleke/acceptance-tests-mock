@@ -81,8 +81,6 @@ cucumber_1.When('I ask to delete the feature {string}', async function (toDelete
         .then(response => response.text())
         .then(data => {
         serviceresponse = data;
-        // console.log(`this is url ${url}`)
-        // console.log(serviceresponse);
         chai_1.expect(serviceresponse).to.contain("Fixture has been deleted");
     })
         .catch((err) => {
