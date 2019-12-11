@@ -2,6 +2,7 @@ const reporter = require("cucumber-html-reporter");
 let date: Date = new Date();
 let options = {
   jsonFile: "test\\report\\cucumber_report.json",
+  output:"test\\report\\cucumber_report.html",
   launchReport: true,
   metadata: {
     "App Version": "0.3.2",
@@ -13,8 +14,7 @@ let options = {
     Squad: "MS1",
     "Test Environment": "STAGING",
     Time: `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
-  },
-  output: `test\\report\\cucumber_report.html`,
+  }, 
   reportSuiteAsScenarios: true,
   theme: "bootstrap"
 };

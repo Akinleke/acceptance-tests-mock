@@ -1,0 +1,282 @@
+[
+  {
+    "description": "Tests Retrieve all Fixtures",
+    "keyword": "Feature",
+    "name": "Retrieve All Fixtures",
+    "line": 1,
+    "id": "retrieve-all-fixtures",
+    "tags": [],
+    "uri": "test\\features\\Fixtures.feature",
+    "elements": [
+      {
+        "id": "retrieve-all-fixtures;1.-retrieve-fixtures",
+        "keyword": "Scenario",
+        "line": 5,
+        "name": "1. Retrieve Fixtures",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "I have called the service \"/fixtures\" to retrieve all fixtures",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "response contains 3 fixtures",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:25"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 1000000,
+              "error_message": "AssertionError\n    + expected - actual\n\n    -8\n    +3\n\n    at World.<anonymous> (C:\\acceptance-tests-mock\\test\\steps\\FixtureSteps.ts:27:36)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "Each fixture has a fixture id",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:31"
+            },
+            "result": {
+              "status": "skipped"
+            }
+          }
+        ]
+      },
+      {
+        "id": "retrieve-all-fixtures;2.-create-a-fixture-and-assert-value-of-home-team",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "2. Create a Fixture and Assert value of Home Team",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 11,
+            "name": "I ask to create fixture with id \"9\" using model in file",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:39"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 5005000000,
+              "error_message": "Error: function timed out, ensure the promise resolves within 5000 milliseconds\n    at Timeout._time.default.setTimeout [as _onTimeout] (C:\\acceptance-tests-mock\\node_modules\\cucumber\\lib\\user_code_runner.js:81:20)\n    at ontimeout (timers.js:436:11)\n    at tryOnTimeout (timers.js:300:5)\n    at listOnTimeout (timers.js:263:5)\n    at Timer.processTimers (timers.js:223:10)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 12,
+            "name": "fixture is created",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:52"
+            },
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 13,
+            "name": "I request the fixture details \"9\"",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:57"
+            },
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "the first team has Id \"HOME\"",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:70"
+            },
+            "result": {
+              "status": "skipped"
+            }
+          }
+        ]
+      },
+      {
+        "id": "retrieve-all-fixtures;3.-latency-test",
+        "keyword": "Scenario",
+        "line": 16,
+        "name": "3. Latency Test",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 17,
+            "name": "I ask to create fixture with id \"10\" using model in file",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:39"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4005000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "fixture is created",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:52"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "I request the fixture details \"10\"",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:57"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 8000000,
+              "error_message": "AssertionError: [object Object]\n    at node_fetch_1.default.then.then.catch (C:\\acceptance-tests-mock\\test\\steps\\FixtureSteps.ts:65:12)\n    at process._tickCallback (internal/process/next_tick.js:68:7)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "the fixture \"10\" is returned",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:74"
+            },
+            "result": {
+              "status": "skipped"
+            }
+          }
+        ]
+      },
+      {
+        "id": "retrieve-all-fixtures;4.-deletion-test",
+        "keyword": "Scenario",
+        "line": 22,
+        "name": "4. Deletion Test",
+        "tags": [],
+        "type": "scenario",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 23,
+            "name": "I ask to create fixture with id \"5\" using model in file",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:39"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1005000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 24,
+            "name": "fixture is created",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:52"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1000000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "I request the fixture details \"5\"",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:57"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 8000000,
+              "error_message": "AssertionError: [object Object]\n    at node_fetch_1.default.then.then.catch (C:\\acceptance-tests-mock\\test\\steps\\FixtureSteps.ts:65:12)\n    at process._tickCallback (internal/process/next_tick.js:68:7)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "the fixture \"5\" is returned",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:74"
+            },
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 27,
+            "name": "I ask to delete the feature \"5\"",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:78"
+            },
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 28,
+            "name": "I have called the service \"/fixtures\" to retrieve all fixtures",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:13"
+            },
+            "result": {
+              "status": "skipped"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 29,
+            "name": "the feature \"5\" no longer exists",
+            "match": {
+              "location": "test\\steps\\FixtureSteps.ts:92"
+            },
+            "result": {
+              "status": "skipped"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
